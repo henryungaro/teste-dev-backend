@@ -29,10 +29,8 @@ public class Client {
 	private String name;
 	private String birthDate;
 	private String sex;
-	//Register date will never change
 	private String registerDate;
 	private String updateDate;
-	//This list will provide the health issue with its degree, since it could be more than one
 	
 	@OneToMany(mappedBy = "client", targetEntity = HealthIssue.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<HealthIssue> health = new ArrayList<>();

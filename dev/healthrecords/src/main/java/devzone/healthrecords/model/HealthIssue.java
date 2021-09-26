@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,6 +25,7 @@ public class HealthIssue {
 	private int degree;
 	
 	@ManyToOne
+	@JoinColumn(name="client_id", nullable = false, updatable = true, insertable = true)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private Client client;
 }

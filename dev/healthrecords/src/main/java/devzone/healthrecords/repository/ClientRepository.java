@@ -4,17 +4,24 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import devzone.healthrecords.model.Client;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
 	@Query
-	(  value = "SELECT DISTINCT p.* " +
-               "FROM proposition_01 p " +
-               "JOIN profile_11 p11 ON p11.a01_id = p.a01_id " +
-               "WHERE p11.a02_id = :userId AND " +
-               "p.a20_id = :organizationId",
+	( value ="SELECT * " +
+             "FROM client c, health_issue h " +
+             "WHERE c.id = h.client_id AND" +
+             " c.name LIKE %:name% ",
                 nativeQuery = true)
-	Optional<Client> findByName(String name);
+	Optional<Client> findByName(@Param("name") String name);
+	
+	@Query
+	( value ="SELECT register_date "
+			+"FROM client WHERE id = :id",
+               nativeQuery = true)
+	String findDateById(@Param("id") Long id);
+	
 }
