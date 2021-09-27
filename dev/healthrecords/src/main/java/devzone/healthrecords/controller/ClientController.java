@@ -20,7 +20,7 @@ import devzone.healthrecords.model.Client;
 import devzone.healthrecords.repository.ClientRepository;
 
 @RestController
-@RequestMapping("/register")
+@RequestMapping("/client")
 public class ClientController {
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy");
@@ -37,12 +37,15 @@ public class ClientController {
 	}
 	
 //@GetMapping("/critical-list")
-//sd = soma do grau dos problemas
-//score = (1 / (1 + eˆ-(-2.8 + sd ))) * 100
-	
+//sd = repository,sumDegree(id)
+//e = 2.718281828459045235360287
+//(1 / (1 + e ^ -(-2.8 + sd ))) * 100;
+//(1 / (Math.pow( 1 + e,-(-2.8 + sd ))) )* 100
+//(1/(1+Math.exp(2.8-sd))) * 100;
+
 	@PostMapping("/create")
 	Client newClient(@RequestBody Client newClient) {
-		//newClient.setRegisterDate(dateFormat.format(date));
+		newClient.setRegisterDate(dateFormat.format(date));
         return repository.save(newClient);
     }
 	

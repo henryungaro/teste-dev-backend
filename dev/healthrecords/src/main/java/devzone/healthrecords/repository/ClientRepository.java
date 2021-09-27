@@ -24,4 +24,11 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
                nativeQuery = true)
 	String findDateById(@Param("id") Long id);
 	
+	@Query
+	(value= "SELECT SUM(degree) "
+	+"FROM client c, health_issue h "
+	+ "WHERE c.id = h.client_id AND c.id= :id"
+	, nativeQuery = true)
+	int sumDegree(@Param("id") Long id);
+	
 }
