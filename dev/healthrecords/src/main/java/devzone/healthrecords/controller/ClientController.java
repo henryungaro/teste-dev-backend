@@ -42,6 +42,7 @@ public class ClientController {
 //(1 / (1 + e ^ -(-2.8 + sd ))) * 100;
 //(1 / (Math.pow( 1 + e,-(-2.8 + sd ))) )* 100
 //(1/(1+Math.exp(2.8-sd))) * 100;
+	
 
 	@PostMapping("/create")
 	Client newClient(@RequestBody Client newClient) {
