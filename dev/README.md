@@ -20,9 +20,9 @@ Bodyraw (json)
 ```
 json
 {
-  "name": "Milena Rodrigues",
-  "birthDate": "05/02/1993",
-  "sex": "Feminino",
+  "name": "Fabricio Monteiro",
+  "birthDate": "15/08/1980",
+  "sex": "Masculino",
   "health": []
 }
 
@@ -57,7 +57,7 @@ Bodyraw (json)
 ```
 json
 {
-  "name": "Fabio Vasconcello",
+  "name": "Fabio Fagundes",
   "birthDate": "15/10/1985",
   "sex": "Masculino",
   "health": []
@@ -68,7 +68,7 @@ Resposta:
 ```
 {
     "id": 1,
-    "name": "Fabio Vasconcello",
+    "name": "Fabio Fagundes",
     "birthDate": "15/10/1985",
     "sex": "Masculino",
     "registerDate": "15/05/2021",
@@ -287,7 +287,7 @@ Bodyraw (json)
 ```
 {
   "description": "teste",
-  "degree": 1,
+  "degree": 2,
   "client": {
     "id": 15
   }
@@ -307,27 +307,8 @@ Responsta
 ```
 localhost:8081/issues/update/id
 ```
-Exemplo:
-```
-localhost:8081/issues/update/13
-```
 Atualiza um problema de saúde a partir de seu id, é necessário fornecer o id de associação do cliente
 
-Bodyraw (json)
-```
-{
-  "description": "teste update",
-  "degree": 1,
-  "client": {
-    "id": 13
-  }
-}
-```
-
-# Health Issue - Update
-```
-localhost:8081/issues/update/id
-```
 Exemplo:
 ```
 /issues/update/6
