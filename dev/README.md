@@ -149,7 +149,8 @@ localhost:8081/client/criticalList
 ```
 Mostra os 10 usuarios com maior risco de saúde, Baseado na furmula:
 score = (1 / (1 + eˆ-(-2.8 + sd ))) * 100
-Exemplo
+
+Exemplo:
 ```
 localhost:8081/client/criticalList
 ```
