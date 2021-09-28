@@ -53,7 +53,6 @@ public class ClientController {
 			ClientRisk auxRisk = new ClientRisk(auxClient, repository.sumDegree(auxClient.getId()));
 			listRisk.add(auxRisk);
 		}
-
 		Collections.sort(listRisk, compareByScore.reversed());
 		return listRisk;
 	}
