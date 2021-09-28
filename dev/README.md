@@ -1,6 +1,7 @@
 # ReadMe
 
 Esta API é utilizada para gerenciamento de cadastro de clientes com problemas de saude.
+Utilizando MySQL. As tabelas com as ligações sao criadas automaticamente.
 
 # Metodos:
  - Criação
