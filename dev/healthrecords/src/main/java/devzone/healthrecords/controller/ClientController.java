@@ -1,9 +1,13 @@
 package devzone.healthrecords.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.lang.Double;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import devzone.healthrecords.model.Client;
+import devzone.healthrecords.model.ClientRisk;
 import devzone.healthrecords.repository.ClientRepository;
 
 @RestController
@@ -25,6 +30,10 @@ public class ClientController {
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy");
 	Date date = new Date();
+	private static double e = 2.718281828459045235360287;
+	Comparator<ClientRisk> compareByScore = (ClientRisk o1, ClientRisk o2) -> Double.compare(o1.getScore(), o2.getScore());
+
+			
 	
 	@Autowired
 	ClientRepository repository;
@@ -36,14 +45,47 @@ public class ClientController {
 		return repository.findAll();
 	}
 	
-//@GetMapping("/critical-list")
+	@GetMapping("/criticalList")
+	public List<ClientRisk> findClientRisk()
+	{
+
+		List<Client> listClient = repository.findAll();
+	    List<ClientRisk> listRisk = new ArrayList<>();
+	    Client auxClient = new Client();
+	    if(listClient.size() < 10)
+	    {
+		    for(int i = 0; i < listClient.size(); i++)
+		    {
+		    ClientRisk auxRisk = new ClientRisk();
+		    auxClient = listClient.get(i);
+		    auxRisk.setId(auxClient.getId());
+		    auxRisk.setName(auxClient.getName());
+		    auxRisk.setScore((1 / (Math.pow( 1 + e,-(-2.8 + repository.sumDegree(auxRisk.getId())))))* 100 );
+		    listRisk.add(auxRisk);
+		    }
+	    }
+	    else
+	    {
+	    	for(int i = 0; i < 9; i++)
+		    {
+		    ClientRisk auxRisk = new ClientRisk();
+		    auxClient = listClient.get(i);
+		    auxRisk.setId(auxClient.getId());
+		    auxRisk.setName(auxClient.getName());
+		    auxRisk.setScore((1 / (Math.pow( 1 + e,-(-2.8 + repository.sumDegree(auxRisk.getId())))))* 100 );
+		    listRisk.add(auxRisk);
+		    }
+	    }
+	    Collections.sort(listRisk, compareByScore.reversed());
+	    return listRisk;
+	}
+	
 //sd = repository,sumDegree(id)
 //e = 2.718281828459045235360287
 //(1 / (1 + e ^ -(-2.8 + sd ))) * 100;
 //(1 / (Math.pow( 1 + e,-(-2.8 + sd ))) )* 100
 //(1/(1+Math.exp(2.8-sd))) * 100;
 	
-
 	@PostMapping("/create")
 	Client newClient(@RequestBody Client newClient) {
 		newClient.setRegisterDate(dateFormat.format(date));
