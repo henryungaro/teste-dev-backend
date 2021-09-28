@@ -142,6 +142,54 @@ Resposta:
 ]
 
 ```
+
+# GET Client - Critical List
+```
+localhost:8081/client/criticalList
+```
+Mostra os 10 usuarios com maior risco de saúde, Baseado na furmula:
+score = (1 / (1 + eˆ-(-2.8 + sd ))) * 100
+Exemplo
+```
+localhost:8081/client/criticalList
+```
+Resposta:
+```
+json
+[
+  {
+    "id": 3,
+    "name": "Roberto Dinis",
+    "score": 6684.907055817889
+  },
+  {
+    "id": 13,
+    "name": "Ricardo Batista",
+    "score": 130.0374548893128
+  },
+  {
+    "id": 1,
+    "name": "Fabio Vasconcello",
+    "score": 9.40554254967863
+  },
+  {
+    "id": 2,
+    "name": "Marcos Pirelly",
+    "score": 9.40554254967863
+  },
+  {
+    "id": 14,
+    "name": "Milena Rodrigues",
+    "score": 9.40554254967863
+  },
+  {
+    "id": 15,
+    "name": "Fabricio Monteiro",
+    "score": 9.40554254967863
+  }
+]
+```
+
 # GET Client - FindById
 
 ```
